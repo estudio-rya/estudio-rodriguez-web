@@ -378,9 +378,15 @@
             margin-bottom: 0.2rem;
         }
 
-        .info-item span {
+        .info-item span, .info-item a {
             color: var(--text-muted);
             font-size: 0.9rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .info-item a:hover {
+            color: var(--accent-gold);
         }
 
         .contact-form {
@@ -578,8 +584,8 @@
             <h1 class="hero-title">Soluciones Estratégicas para el Crecimiento de su Empresa</h1>
             <p class="hero-description">Brindamos asesoramiento integral y personalizado. Acompañamos a PyMEs, empresas y particulares en la toma de decisiones clave con transparencia y excelencia profesional.</p>
             <div class="hero-buttons">
-                <a href="#contacto" class="btn-primary">
-                    Agendar Consulta <i class="fa-solid fa-arrow-right"></i>
+                <a href="https://wa.me/5492212230845" target="_blank" class="btn-primary">
+                    <i class="fa-brands fa-whatsapp"></i> Consultar por WhatsApp
                 </a>
                 <a href="#servicios" class="btn-secondary">Conocer Servicios</a>
             </div>
@@ -670,28 +676,21 @@
                     <i class="fa-solid fa-location-dot"></i>
                     <div>
                         <h4>Ubicación</h4>
-                        <span>Oficinas Centrales, Argentina</span>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <i class="fa-solid fa-envelope"></i>
-                    <div>
-                        <h4>Email</h4>
-                        <span>contacto@estudiocontablerya.com.ar</span>
+                        <span>Calle 17 N° 371 entre 39 y 40, La Plata, Bs. As.</span>
                     </div>
                 </div>
                 <div class="info-item">
                     <i class="fa-solid fa-phone"></i>
                     <div>
                         <h4>Teléfono / WhatsApp</h4>
-                        <span>+54 9 11 0000-0000</span>
+                        <a href="https://wa.me/5492212230845" target="_blank">+54 221 2230845</a>
                     </div>
                 </div>
                 <div class="info-item">
                     <i class="fa-solid fa-clock"></i>
                     <div>
                         <h4>Horario de Atención</h4>
-                        <span>Lunes a Viernes: 09:00 - 18:00 hs</span>
+                        <span>Lunes a Viernes: 09:00 a 16:00 hs</span>
                     </div>
                 </div>
             </div>
@@ -751,7 +750,7 @@
     </footer>
 
     <!-- WhatsApp Button -->
-    <a href="https://wa.me/5491100000000" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+    <a href="https://wa.me/5492212230845" class="whatsapp-float" target="_blank" rel="noopener noreferrer" title="Contactar por WhatsApp">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
