@@ -1,917 +1,775 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Estudio Rodríguez y Asociados — Contadores Públicos</title>
-<meta name="description" content="Estudio contable especializado en gestión Impositiva, Laboral, Contable y Societaria. Asesoramos a PyMEs, comercios, monotributistas y autónomos.">
-<link rel="icon" type="image/png" href="assets/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&family=Space+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #1c2b22;
-    --paper: #f4efe4;
-    --ledger-green: #16382b;
-    --ledger-green-dark: #0d2119;
-    --gold: #a97e3f;
-    --gold-light: #c9a366;
-    --rule: #d8cfb8;
-    --white: #fffdf8;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Source Sans 3', sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  h1, h2, h3 {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: var(--ledger-green);
-  }
-
-  .mono {
-    font-family: 'Space Mono', monospace;
-  }
-
-  a { color: inherit; text-decoration: none; }
-
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 32px;
-  }
-
-  /* Textura sutil de "papel de libro contable" */
-  .ledger-lines {
-    background-image: repeating-linear-gradient(
-      to bottom,
-      transparent,
-      transparent 27px,
-      var(--rule) 27px,
-      var(--rule) 28px
-    );
-  }
-
-  /* ---------- HEADER ---------- */
-  header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(244, 239, 228, 0.92);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .nav-wrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 32px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .logo {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 1.15rem;
-    color: var(--ledger-green);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .logo img {
-    width: 36px;
-    height: 36px;
-    border-radius: 6px;
-    object-fit: cover;
-    flex-shrink: 0;
-  }
-
-  nav.links {
-    display: flex;
-    gap: 32px;
-    font-size: 0.95rem;
-  }
-
-  nav.links a {
-    position: relative;
-    padding-bottom: 4px;
-    transition: color 0.2s;
-  }
-
-  nav.links a:hover { color: var(--gold); }
-
-  .nav-cta {
-    background: var(--ledger-green);
-    color: var(--white) !important;
-    padding: 10px 20px;
-    border-radius: 3px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: background 0.2s;
-  }
-
-  .nav-cta:hover { background: var(--ledger-green-dark); }
-
-  .mobile-toggle { display: none; }
-
-  /* ---------- HERO ---------- */
-  .hero {
-    position: relative;
-    padding: 110px 32px 100px;
-    overflow: hidden;
-  }
-
-  .hero-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-  }
-
-  .eyebrow {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 24px;
-  }
-
-  .eyebrow::before {
-    content: "";
-    width: 24px;
-    height: 1px;
-    background: var(--gold);
-  }
-
-  .hero h1 {
-    font-size: clamp(2.6rem, 5.5vw, 4.4rem);
-    line-height: 1.05;
-    max-width: 780px;
-    margin-bottom: 28px;
-  }
-
-  .hero h1 em {
-    font-style: italic;
-    color: var(--gold);
-  }
-
-  .hero p.lead {
-    font-size: 1.2rem;
-    max-width: 560px;
-    color: #3d4b41;
-    margin-bottom: 40px;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    background: var(--ledger-green);
-    color: var(--white);
-    padding: 15px 30px;
-    border-radius: 3px;
-    font-weight: 600;
-    font-size: 1rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    transition: transform 0.2s, background 0.2s;
-    border: 1px solid var(--ledger-green);
-  }
-
-  .btn-primary:hover {
-    background: var(--ledger-green-dark);
-    transform: translateY(-2px);
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--ledger-green);
-    padding: 15px 30px;
-    border-radius: 3px;
-    font-weight: 600;
-    font-size: 1rem;
-    border: 1px solid var(--ink);
-    transition: background 0.2s, transform 0.2s;
-  }
-
-  .btn-secondary:hover {
-    background: rgba(28,43,34,0.06);
-    transform: translateY(-2px);
-  }
-
-  /* Elemento firma: sello / folio contable flotante */
-  .ledger-stamp {
-    position: absolute;
-    top: 90px;
-    right: -40px;
-    width: 340px;
-    opacity: 0.9;
-    z-index: 1;
-  }
-
-  @media (max-width: 900px) {
-    .ledger-stamp { display: none; }
-  }
-
-  /* ---------- STRIP DE CONFIANZA ---------- */
-  .trust-strip {
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    background: var(--white);
-  }
-
-  .trust-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 28px 32px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 24px;
-  }
-
-  .trust-item {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-  }
-
-  .trust-item .num {
-    font-family: 'Fraunces', serif;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--gold);
-  }
-
-  .trust-item .label {
-    font-size: 0.9rem;
-    color: #56635a;
-  }
-
-  /* ---------- SERVICIOS ---------- */
-  .services {
-    padding: 110px 32px 100px;
-  }
-
-  .section-head {
-    text-align: left;
-    max-width: 620px;
-    margin-bottom: 64px;
-  }
-
-  .section-head .eyebrow { margin-bottom: 18px; }
-
-  .section-head h2 {
-    font-size: clamp(2rem, 3.6vw, 2.8rem);
-    margin-bottom: 18px;
-  }
-
-  .section-head p {
-    color: #4a564c;
-    font-size: 1.08rem;
-  }
-
-  .service-ledger {
-    border-top: 1px solid var(--ink);
-  }
-
-  .service-row {
-    display: grid;
-    grid-template-columns: 90px 1fr 1.3fr;
-    gap: 40px;
-    padding: 38px 0;
-    border-bottom: 1px solid var(--rule);
-    align-items: start;
-    transition: background 0.25s;
-  }
-
-  .service-row:hover {
-    background: rgba(169, 126, 63, 0.045);
-  }
-
-  .service-folio {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.85rem;
-    color: var(--gold);
-    padding-top: 6px;
-  }
-
-  .service-row h3 {
-    font-size: 1.5rem;
-  }
-
-  .service-row .desc {
-    color: #4a564c;
-    font-size: 1rem;
-  }
-
-  .service-row .desc ul {
-    margin-top: 12px;
-    padding-left: 18px;
-  }
-
-  .service-row .desc li {
-    margin-bottom: 4px;
-  }
-
-  @media (max-width: 760px) {
-    .service-row {
-      grid-template-columns: 1fr;
-      gap: 10px;
-      padding: 28px 0;
-    }
-    .service-folio { padding-top: 0; }
-  }
-
-  /* ---------- POR QUÉ NOSOTROS ---------- */
-  .why {
-    background: var(--ledger-green);
-    color: var(--paper);
-    padding: 100px 32px;
-    position: relative;
-  }
-
-  .why-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .why .eyebrow { color: var(--gold-light); }
-  .why .eyebrow::before { background: var(--gold-light); }
-
-  .why h2 {
-    color: var(--white);
-    font-size: clamp(1.9rem, 3.2vw, 2.5rem);
-    max-width: 640px;
-    margin-bottom: 56px;
-  }
-
-  .why-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-  }
-
-  @media (max-width: 800px) {
-    .why-grid { grid-template-columns: 1fr; gap: 36px; }
-  }
-
-  .why-card .index {
-    font-family: 'Space Mono', monospace;
-    color: var(--gold-light);
-    font-size: 0.85rem;
-    margin-bottom: 14px;
-    display: block;
-  }
-
-  .why-card h3 {
-    color: var(--white);
-    font-size: 1.3rem;
-    margin-bottom: 12px;
-    font-weight: 500;
-  }
-
-  .why-card p {
-    color: #cdd9cf;
-    font-size: 0.98rem;
-  }
-
-  /* ---------- SOCIOS ---------- */
-  .team {
-    padding: 100px 32px;
-  }
-
-  .team-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    margin-top: 56px;
-  }
-
-  @media (max-width: 800px) {
-    .team-grid { grid-template-columns: 1fr; }
-  }
-
-  .team-card {
-    background: var(--white);
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-    padding: 32px;
-  }
-
-  .team-avatar {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: var(--ledger-green);
-    color: var(--paper);
-    font-family: 'Fraunces', serif;
-    font-size: 1.3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-
-  .team-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 4px;
-  }
-
-  .team-card .role {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--gold);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 14px;
-  }
-
-  .team-card p.bio {
-    font-size: 0.92rem;
-    color: #56635a;
-  }
-
-  /* ---------- CONTACTO ---------- */
-  .contact {
-    padding: 110px 32px 120px;
-    background: var(--white);
-    border-top: 1px solid var(--rule);
-  }
-
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 70px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  @media (max-width: 860px) {
-    .contact-grid { grid-template-columns: 1fr; gap: 50px; }
-  }
-
-  .contact h2 {
-    font-size: clamp(1.9rem, 3.2vw, 2.6rem);
-    margin-bottom: 20px;
-  }
-
-  .contact-lead {
-    color: #4a564c;
-    margin-bottom: 40px;
-    max-width: 420px;
-  }
-
-  .direct-contact {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-
-  .direct-item {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .direct-item .icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .direct-item .icon svg { width: 19px; height: 19px; stroke: var(--ledger-green); }
-
-  .direct-item .label {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #8a9188;
-    font-family: 'Space Mono', monospace;
-  }
-
-  .direct-item .value {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--ink);
-  }
-
-  .direct-item a.value:hover { color: var(--gold); }
-
-  /* Formulario */
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .field label {
-    font-size: 0.85rem;
-    font-family: 'Space Mono', monospace;
-    color: var(--ledger-green);
-  }
-
-  .field input,
-  .field select,
-  .field textarea {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 1rem;
-    padding: 13px 14px;
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    background: var(--paper);
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .field input:focus,
-  .field select:focus,
-  .field textarea:focus {
-    border-color: var(--gold);
-  }
-
-  .field textarea { resize: vertical; min-height: 110px; }
-
-  .form-submit {
-    margin-top: 6px;
-    background: var(--ledger-green);
-    color: var(--white);
-    padding: 15px 30px;
-    border: none;
-    border-radius: 3px;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.2s;
-    font-family: 'Source Sans 3', sans-serif;
-  }
-
-  .form-submit:hover { background: var(--ledger-green-dark); }
-
-  .form-note {
-    font-size: 0.82rem;
-    color: #8a9188;
-    margin-top: 4px;
-  }
-
-  .form-success {
-    display: none;
-    background: #eaf1ea;
-    border: 1px solid #b8cdb9;
-    color: var(--ledger-green-dark);
-    padding: 16px 18px;
-    border-radius: 4px;
-    font-size: 0.95rem;
-  }
-
-  /* ---------- FOOTER ---------- */
-  footer {
-    background: var(--ledger-green-dark);
-    color: #93a596;
-    padding: 44px 32px;
-  }
-
-  .footer-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    font-size: 0.88rem;
-  }
-
-  .footer-inner .logo { color: var(--paper); }
-
-  @media (max-width: 700px) {
-    nav.links { display: none; }
-  }
-
-  /* Animación de entrada suave */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .fade-up { opacity: 1; transform: none; transition: none; }
-    html { scroll-behavior: auto; }
-  }
-
-  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
-    outline: 2px solid var(--gold);
-    outline-offset: 2px;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio Contable R&A | Asesoría Integral y Consultoría</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #334155;
+            --accent-gold: #c5a059;
+            --accent-gold-hover: #d4af37;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --font-title: 'Cinzel', serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Header & Navbar --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-nav {
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold) !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 4px;
+            transition: var(--transition) !important;
+        }
+
+        .btn-nav:hover {
+            background: var(--accent-gold);
+            color: var(--bg-dark) !important;
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            padding: 180px 2rem 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle at 50% 30%, rgba(197, 160, 89, 0.08) 0%, rgba(15, 23, 42, 1) 70%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .hero-subtitle {
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .hero-title {
+            font-family: var(--font-title);
+            font-size: 3.5rem;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+            padding: 0.9rem 2.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--accent-gold);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-gold-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            padding: 0.9rem 2.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-main);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* --- Global Section Layout --- */
+        section {
+            padding: 100px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        /* --- Servicios --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            position: relative;
+            top: 0;
+        }
+
+        .service-card:hover {
+            top: -8px;
+            border-color: rgba(197, 160, 89, 0.3);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+            background: var(--bg-card-hover);
+        }
+
+        .service-icon {
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* --- Nosotros / Equipo --- */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .team-card:hover {
+            border-color: rgba(197, 160, 89, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(197, 160, 89, 0.1);
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        .team-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .team-card .role {
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* --- Contacto --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 3.5rem;
+        }
+
+        .contact-info h3 {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item i {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            margin-top: 4px;
+        }
+
+        .info-item h4 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .info-item span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.8rem 1rem;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #090d16;
+            border-top: 1px solid var(--border-color);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-about p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            max-width: 350px;
+        }
+
+        .footer-links h4 {
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-main);
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* --- Botón Flotante WhatsApp --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25d366;
+            color: #fff;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #20ba5a;
+        }
+
+        /* --- Responsive Styles --- */
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                padding: 2.5rem;
+            }
+            .hero-title {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-dark);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--border-color);
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <div class="nav-wrap">
-    <a href="#top" class="logo"><img src="assets/logo.png" alt="Logo Estudio Rodríguez y Asociados">Rodríguez &amp; Asociados</a>
-    <nav class="links">
-      <a href="#servicios">Servicios</a>
-      <a href="#nosotros">Nosotros</a>
-      <a href="#equipo">Equipo</a>
-      <a href="#contacto" class="nav-cta">Contactanos</a>
-    </nav>
-  </div>
-</header>
-
-<section class="hero" id="top">
-  <div class="hero-inner">
-    <p class="eyebrow">Contadores Públicos · La Plata</p>
-    <h1>Los números de tu negocio, <em>en orden</em> y a tu favor.</h1>
-    <p class="lead">Asesoramiento impositivo, laboral, contable y societario para PyMEs, comercios, monotributistas y autónomos. Un equipo, un contacto, todas tus obligaciones al día.</p>
-    <div class="hero-actions">
-      <a href="#contacto" class="btn-primary">Solicitar una consulta →</a>
-      <a href="#servicios" class="btn-secondary">Ver servicios</a>
-    </div>
-  </div>
-
-  <svg class="ledger-stamp" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <circle cx="150" cy="150" r="118" stroke="#a97e3f" stroke-width="1.2" stroke-dasharray="2 4" opacity="0.55"/>
-    <circle cx="150" cy="150" r="95" stroke="#16382b" stroke-width="1"/>
-    <path id="stampCircle" d="M 150 150 m -72 0 a 72 72 0 1 1 144 0 a 72 72 0 1 1 -144 0" fill="none"/>
-    <text font-family="Space Mono, monospace" font-size="11" fill="#16382b" letter-spacing="3">
-      <textPath href="#stampCircle" startOffset="2%">ESTUDIO RODRÍGUEZ Y ASOCIADOS •</textPath>
-    </text>
-    <text x="150" y="145" font-family="Fraunces, serif" font-size="34" fill="#16382b" text-anchor="middle" font-weight="600">R&amp;A</text>
-    <text x="150" y="168" font-family="Space Mono, monospace" font-size="9" fill="#a97e3f" text-anchor="middle" letter-spacing="2">CONTADORES PÚBLICOS</text>
-  </svg>
-</section>
-
-<div class="trust-strip">
-  <div class="trust-inner">
-    <div class="trust-item"><span class="num">4</span><span class="label">áreas de práctica bajo un mismo estudio</span></div>
-    <div class="trust-item"><span class="num">3</span><span class="label">socios a cargo, sin intermediarios</span></div>
-    <div class="trust-item"><span class="num">24h</span><span class="label">tiempo de respuesta a tu consulta</span></div>
-  </div>
-</div>
-
-<section class="services" id="servicios">
-  <div class="container">
-    <div class="section-head fade-up">
-      <p class="eyebrow">Qué hacemos</p>
-      <h2>Cuatro áreas, un mismo equipo</h2>
-      <p>No tercerizamos. Cada área la lleva gente del estudio que conoce tu negocio de punta a punta.</p>
-    </div>
-
-    <div class="service-ledger">
-      <div class="service-row fade-up">
-        <div class="service-folio">01 — IMP</div>
-        <h3>Impositivos</h3>
-        <div class="desc">
-          Liquidación y presentación de impuestos nacionales, provinciales y municipales, y planificación fiscal para que no pagues de más.
-          <ul>
-            <li>IVA, Ganancias y Bienes Personales</li>
-            <li>Ingresos Brutos y regímenes de retención</li>
-            <li>Monotributo: categorización y recategorización</li>
-            <li>Planificación fiscal anual</li>
-          </ul>
+    <!-- Header / Nav -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>ESTUDIO R&A</span>
+            </a>
+            <div class="mobile-toggle" id="mobile-menu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-list">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#nosotros">Equipo</a></li>
+                <li><a href="#contacto" class="btn-nav">Contacto</a></li>
+            </ul>
         </div>
-      </div>
+    </header>
 
-      <div class="service-row fade-up">
-        <div class="service-folio">02 — LAB</div>
-        <h3>Laborales</h3>
-        <div class="desc">
-          Liquidación de sueldos y gestión integral de las relaciones laborales de tu empresa, con las cargas sociales al día.
-          <ul>
-            <li>Liquidación de sueldos y cargas sociales</li>
-            <li>Altas, bajas y modificaciones ante AFIP</li>
-            <li>Convenios colectivos y régimen sindical</li>
-            <li>Asesoramiento en desvinculaciones</li>
-          </ul>
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <span class="hero-subtitle">Asesoría Contable, Impositiva y Jurídica</span>
+            <h1 class="hero-title">Soluciones Estratégicas para el Crecimiento de su Empresa</h1>
+            <p class="hero-description">Brindamos asesoramiento integral y personalizado. Acompañamos a PyMEs, empresas y particulares en la toma de decisiones clave con transparencia y excelencia profesional.</p>
+            <div class="hero-buttons">
+                <a href="#contacto" class="btn-primary">
+                    Agendar Consulta <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#servicios" class="btn-secondary">Conocer Servicios</a>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="service-row fade-up">
-        <div class="service-folio">03 — CON</div>
-        <h3>Contables</h3>
-        <div class="desc">
-          Registración contable y estados financieros que te dan una foto real y a tiempo de cómo está tu negocio.
-          <ul>
-            <li>Registración contable mensual</li>
-            <li>Balances y estados contables</li>
-            <li>Informes gerenciales para toma de decisiones</li>
-            <li>Auditoría interna</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="service-row fade-up">
-        <div class="service-folio">04 — SOC</div>
-        <h3>Societarios</h3>
-        <div class="desc">
-          Desde la constitución de tu sociedad hasta cada trámite que necesite después, con los tiempos legales cubiertos.
-          <ul>
-            <li>Constitución de sociedades (SAS, SRL, SA)</li>
-            <li>Actas, asambleas y libros societarios</li>
-            <li>Reorganizaciones y transferencias de cuotas</li>
-            <li>Trámites ante IGJ y organismos de contralor</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="why" id="nosotros">
-  <div class="why-inner">
-    <p class="eyebrow fade-up">Por qué elegirnos</p>
-    <h2 class="fade-up">Estudio chico, trato directo. Eso es lo que nos diferencia.</h2>
-    <div class="why-grid">
-      <div class="why-card fade-up">
-        <span class="index">Trato</span>
-        <h3>Hablás con quien te atiende</h3>
-        <p>Tu contacto es un socio del estudio, no un call center. Las decisiones se toman rápido porque quien te responde es quien decide.</p>
-      </div>
-      <div class="why-card fade-up">
-        <span class="index">Alcance</span>
-        <h3>Un estudio para todo</h3>
-        <p>Impositivo, laboral, contable y societario bajo un mismo techo. No tenés que coordinar entre varios profesionales.</p>
-      </div>
-      <div class="why-card fade-up">
-        <span class="index">Foco</span>
-        <h3>PyMEs y autónomos</h3>
-        <p>Trabajamos tanto con comercios y PyMEs como con monotributistas y autónomos. Conocemos los dos mundos.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="team" id="equipo">
-  <div class="container">
-    <div class="section-head fade-up">
-      <p class="eyebrow">Quiénes somos</p>
-      <h2>Los socios</h2>
-    </div>
-    <div class="team-grid">
-      <div class="team-card fade-up">
-        <div class="team-avatar">R</div>
-        <h3>Nombre Apellido</h3>
-        <p class="role">Contador Público · Socio</p>
-        <p class="bio">Especializado en el área Impositiva y planificación fiscal para PyMEs.</p>
-      </div>
-      <div class="team-card fade-up">
-        <div class="team-avatar">R</div>
-        <h3>Nombre Apellido</h3>
-        <p class="role">Contador Público · Socio</p>
-        <p class="bio">A cargo del área Laboral y liquidación de sueldos.</p>
-      </div>
-      <div class="team-card fade-up">
-        <div class="team-avatar">R</div>
-        <h3>Nombre Apellido</h3>
-        <p class="role">Contador Público · Socio</p>
-        <p class="bio">Responsable del área Contable y Societaria del estudio.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="contact" id="contacto">
-  <div class="contact-grid">
-    <div class="fade-up">
-      <p class="eyebrow">Contacto</p>
-      <h2>Contanos qué necesitás</h2>
-      <p class="contact-lead">Completá el formulario o escribinos directo por WhatsApp. Te respondemos dentro de las 24&nbsp;horas hábiles.</p>
-
-      <div class="direct-contact">
-        <div class="direct-item">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5A2.5 2.5 0 0 1 5.5 3h1.7a1 1 0 0 1 .97.76l1.02 4.1a1 1 0 0 1-.5 1.12l-1.7.94a12.5 12.5 0 0 0 6.1 6.1l.94-1.7a1 1 0 0 1 1.12-.5l4.1 1.02a1 1 0 0 1 .76.97v1.7A2.5 2.5 0 0 1 17.5 21C9.49 21 3 14.51 3 6.5z"/></svg>
-          </div>
-          <div>
-            <div class="label">WhatsApp</div>
-            <a class="value" href="https://wa.me/5490000000000" target="_blank" rel="noopener">+54 9 XXX XXX-XXXX</a>
-          </div>
-        </div>
-        <div class="direct-item">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-          </div>
-          <div>
-            <div class="label">Email</div>
-            <a class="value" href="mailto:contacto@rodriguezyasociados.com.ar">contacto@rodriguezyasociados.com.ar</a>
-          </div>
-        </div>
-        <div class="direct-item">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-          </div>
-          <div>
-            <div class="label">Oficina</div>
-            <span class="value">La Plata, Buenos Aires</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="fade-up">
-      <form id="contactForm" action="https://formsubmit.co/contacto@rodriguezyasociados.com.ar" method="POST">
-        <input type="hidden" name="_subject" value="Nueva consulta desde la web">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-
-        <div class="field">
-          <label for="nombre">Nombre y apellido</label>
-          <input type="text" id="nombre" name="Nombre" required placeholder="Tu nombre">
-        </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="Email" required placeholder="tu@email.com">
-        </div>
-        <div class="field">
-          <label for="telefono">Teléfono / WhatsApp</label>
-          <input type="tel" id="telefono" name="Teléfono" placeholder="11 XXXX-XXXX">
-        </div>
-        <div class="field">
-          <label for="servicio">Servicio que te interesa</label>
-          <select id="servicio" name="Servicio">
-            <option value="Impositivos">Impositivos</option>
-            <option value="Laborales">Laborales</option>
-            <option value="Contables">Contables</option>
-            <option value="Societarios">Societarios</option>
-            <option value="No estoy seguro">No estoy seguro / quiero asesoramiento general</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="mensaje">Contanos brevemente tu consulta</label>
-          <textarea id="mensaje" name="Mensaje" placeholder="Ej: Necesito ayuda para constituir una SRL..."></textarea>
+    <!-- Servicios Section -->
+    <section id="servicios">
+        <div class="section-header">
+            <h2>Nuestros Servicios</h2>
+            <p>Especialización e innovación constante para brindar coberturas eficientes adaptadas a sus necesidades.</p>
         </div>
 
-        <button type="submit" class="form-submit">Enviar consulta</button>
-        <p class="form-note">Al enviar este formulario, tu consulta llega directo a nuestro email.</p>
-        <div class="form-success" id="formSuccess">✓ ¡Gracias! Recibimos tu consulta y te vamos a contactar a la brevedad.</div>
-      </form>
-    </div>
-  </div>
-</section>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fa-solid fa-calculator service-icon"></i>
+                <h3>Asesoramiento Impositivo</h3>
+                <p>Planificación fiscal, liquidación de impuestos nacionales, provinciales y municipales. Auditoría impositiva integral.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-chart-line service-icon"></i>
+                <h3>Contabilidad y Balances</h3>
+                <p>Confección de estados contables, certifaciones de ingresos, auditorías financieras y teneduría de libros obligatorios.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-users-gear service-icon"></i>
+                <h3>Liquidación de Sueldos</h3>
+                <p>Administración de personal, liquidación de cargas sociales, asesoramiento laboral e inspecciones del organismo de control.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-briefcase service-icon"></i>
+                <h3>Societario y Pymes</h3>
+                <p>Constitución de sociedades, reformas estatutarias, trámites ante la IGJ/DPJP y reestructuraciones empresariales.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-lightbulb service-icon"></i>
+                <h3>Consultoría Financiera</h3>
+                <p>Análisis de costos, proyecciones financieras, evaluación de proyectos de inversión y gestión de flujos de fondos.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-file-contract service-icon"></i>
+                <h3>Auditoría e Informes</h3>
+                <p>Emisión de dictámenes e informes técnicos independientes para la evaluación objetiva del estado del negocio.</p>
+            </div>
+        </div>
+    </section>
 
-<footer>
-  <div class="footer-inner">
-    <a href="#top" class="logo"><img src="assets/logo.png" alt="Logo Estudio Rodríguez y Asociados">Rodríguez &amp; Asociados</a>
-    <span>© 2026 Estudio Rodríguez y Asociados — Contadores Públicos</span>
-  </div>
-</footer>
+    <!-- Nosotros / Equipo Section -->
+    <section id="nosotros">
+        <div class="section-header">
+            <h2>Nuestro Equipo</h2>
+            <p>Conoce a los socios a cargo del estudio.</p>
+        </div>
 
-<script>
-  // Animación de entrada al hacer scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <h3>Rodriguez Emanuel</h3>
+                <p class="role">Contador Público - Socio y Fundador</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <h3>Elortegui Felix</h3>
+                <p class="role">Contador Público - Socio</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <h3>Mariezcurrena Santiago</h3>
+                <p class="role">Contador Público - Socio</p>
+            </div>
+        </div>
+    </section>
 
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-</script>
+    <!-- Contacto Section -->
+    <section id="contacto">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Hablemos de su Proyecto</h3>
+                <p>Complete el formulario o comuníquese a través de nuestros canales directos para coordinar una reunión.</p>
+                
+                <div class="info-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <h4>Ubicación</h4>
+                        <span>Oficinas Centrales, Argentina</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <h4>Email</h4>
+                        <span>contacto@estudiocontablerya.com.ar</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <h4>Teléfono / WhatsApp</h4>
+                        <span>+54 9 11 0000-0000</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-clock"></i>
+                    <div>
+                        <h4>Horario de Atención</h4>
+                        <span>Lunes a Viernes: 09:00 - 18:00 hs</span>
+                    </div>
+                </div>
+            </div>
 
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Mensaje enviado con éxito. Nos pondremos en contacto a la brevedad.');">
+                <div class="form-group">
+                    <label for="name">Nombre y Apellido</label>
+                    <input type="text" id="name" required placeholder="Ej. Juan Pérez">
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" required placeholder="ejemplo@empresa.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Teléfono</label>
+                    <input type="tel" id="phone" placeholder="Número de contacto">
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensaje / Consulta</label>
+                    <textarea id="message" required placeholder="Describa brevemente en qué podemos ayudarle..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="border:none; cursor:pointer;">Enviar Consulta</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <a href="#" class="logo">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <span>ESTUDIO R&A</span>
+                </a>
+                <p>Excelencia, ética y solvencia técnica en servicios contables, impositivos y corporativos.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navegación</h4>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#nosotros">Equipo</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legales</h4>
+                <ul>
+                    <li><a href="#">Términos de Servicio</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Estudio Contable R&A. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/5491100000000" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript para interacción móvil -->
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+
+        mobileMenu.addEventListener('click', () => {
+            navList.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
