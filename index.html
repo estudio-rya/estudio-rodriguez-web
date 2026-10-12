@@ -105,14 +105,16 @@
 
         .logo {
             font-family: var(--font-title);
-            font-size: 1.5rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: var(--text-main);
             text-decoration: none;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             display: flex;
             align-items: center;
             gap: 10px;
+            white-space: normal;
+            line-height: 1.2;
         }
 
         .logo span {
@@ -567,6 +569,11 @@
                 display: block;
             }
 
+            .logo {
+                font-size: 0.8rem;
+                max-width: 75%;
+            }
+
             .nav-links {
                 position: absolute;
                 top: 100%;
@@ -600,8 +607,7 @@
     <header>
         <div class="nav-container">
             <a href="#" class="logo">
-                <i class="fa-solid fa-calculator"></i>
-                <span>ESTUDIO R&A</span>
+                <span>ESTUDIO CONTABLE RODRIGUEZ Y ASOCIADOS</span>
             </a>
             <div class="mobile-toggle" id="mobile-menu">
                 <i class="fa-solid fa-bars"></i>
@@ -773,8 +779,7 @@
         <div class="footer-container">
             <div class="footer-about">
                 <a href="#" class="logo">
-                    <i class="fa-solid fa-calculator"></i>
-                    <span>ESTUDIO R&A</span>
+                    <span>ESTUDIO CONTABLE RODRIGUEZ Y ASOCIADOS</span>
                 </a>
                 <p>Excelencia, ética y solvencia técnica en servicios contables, impositivos y corporativos.</p>
             </div>
